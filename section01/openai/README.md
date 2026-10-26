@@ -93,7 +93,7 @@ OpenAI-specific properties used by this application:
 
 ### AWS Bedrock
 
-AWS Bedrock-specific properties configured in this project:
+Amazon Bedrock is a fully managed AWS service that provides access to more than 100 foundation models from leading AI providers through a single API. AWS Bedrock-specific properties configured in this project:
 
 | Property                                        | Sample value          | Description                                                          |
 |-------------------------------------------------|-----------------------|----------------------------------------------------------------------|
