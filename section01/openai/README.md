@@ -4,16 +4,20 @@ This application demonstrates using Spring AI's `ChatClient` to interact with an
 
 ## Sample endpoints
 
-Start the application, then try these endpoints:
-
-- [http://localhost:8080/api/hello?message=master](http://localhost:8080/api/hello?message=master) returns a simple greeting (`Hello, master!`). This endpoint confirms the application is running and echoes the supplied `message` parameter; it does not call an AI model.
-- The chat endpoint sends the supplied question to the configured model and returns its response. You can run this HTTP request from an IDE HTTP client or save it in a `.http` file:
+All controller endpoints use the `/api/v1` prefix. Start the application, then try these routes:
 
   ```http
-  GET http://localhost:8080/api/chat?message=how%20is%20the%20weather%20in%20Chennai%20today
+  GET http://localhost:8080/api/v1/hello?message=master
+  GET http://localhost:8080/api/v1/chat?message=how%20is%20the%20weather%20in%20Chennai%20today
+  GET http://localhost:8080/api/v1/chatHR?message=what%20is%20the%20leave%20policy
+  GET http://localhost:8080/api/v1/promptStuffing?message=I%27ve%20already%20taken%205%20days%20of%20leave.%20How%20many%20days%20of%20leave%20can%20be%20carried%20over%20to%20next%20year%3F
+  GET http://localhost:8080/api/v1/emailResponseV1?customerName=Alex&customerMessage=My%20order%20is%20late
+  GET http://localhost:8080/api/v1/emailResponseV2?customerName=Alex&customerMessage=My%20order%20is%20late
   ```
 
-  The model may not have live weather data, so verify current conditions with a live weather source.
+`hello` echoes the supplied `message` in a greeting without calling an AI model. The other routes call the configured model; `chatHR` is limited to HR-policy questions, and the email response routes require `customerName` and `customerMessage`. `emailResponseV1` is mapped without an HTTP-method restriction; the other listed routes accept GET requests.
+
+The chat model may not have live weather data, so verify current conditions with a live weather source.
 
 ## Spring AI chat interfaces
 
@@ -57,7 +61,7 @@ Ollama runs models locally and does not require an OpenAI API key. To use it wit
 
 4. Add the properties below to `src/main/resources/application.properties`.
 
-Remove the OpenAI API key configuration when switching providers. Restart the application and use the same `/api/chat` endpoint; Spring AI will connect to Ollama at `http://localhost:11434`.
+Remove the OpenAI API key configuration when switching providers. Restart the application and use the same `/api/v1/chat` endpoint; Spring AI will connect to Ollama at `http://localhost:11434`.
 
 ## General Spring AI properties
 
